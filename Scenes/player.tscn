@@ -28,20 +28,30 @@ process_mode = 2
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 538.0
+offset_top = 251.0
+offset_right = 578.0
+offset_bottom = 291.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("2_vl4l5")
 
 [node name="MarginContainer" type="MarginContainer" parent="Pivot/Camera3D/PauseMenu"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 66.0
+grow_horizontal = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pivot/Camera3D/PauseMenu/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="ResumeGame" type="Button" parent="Pivot/Camera3D/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Resume"
 
 [node name="ReturnToMainMenu" type="Button" parent="Pivot/Camera3D/PauseMenu/MarginContainer/VBoxContainer"]
