@@ -30,6 +30,13 @@ func _ready() -> void:
 	HealthBar.max_value = max_health
 	_set_heatlhbar()
 
+func _process(delta):
+	if(navigationAgent.is_navigation_finished()):
+		return
+	
+	pass
+
+
 func _input(event):
 	if Input.is_action_just_pressed("MoveToLocation"):
 		var mousePosition = get_viewport().get_mouse_position()
@@ -42,7 +49,7 @@ func _input(event):
 		rayQuery.from = fromPosition
 		rayQuery.to = toPosition
 		
-		var result = space.intersact_ray(rayQuery)
+		var result = space.intersect_ray(rayQuery)
 		print(result)
 
 # Function "kuuntelee" kaikkia inputteja, joka tässä tapauksessa on hiiri.
