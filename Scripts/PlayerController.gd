@@ -37,12 +37,20 @@ func _process(delta):
 	moveToPosition(delta)
 	pass
 
+#Määritellään pelaajan point & click movement.
 func moveToPosition(delta):
 	var targetPosition = navigationAgent.get_next_path_position()
 	var direction = global_position.direction_to(targetPosition)
 	
+	if global_transform.origin.is_equal_approx(targetPosition):
+		return
+	faceToDirection(targetPosition)
+	
 	velocity = direction * SPEED
 	move_and_slide()
+	
+func faceToDirection(direction):
+	look_at(Vector3(direction.x, global_position.y, direction.z),Vector3.UP)
 
 func _input(event):
 	if Input.is_action_just_pressed("MoveToLocation"):
@@ -57,6 +65,10 @@ func _input(event):
 		rayQuery.to = toPosition
 		
 		var result = space.intersect_ray(rayQuery)
+		
+		if result.is_empty():
+			return
+			
 		print(result)
 		
 		navigationAgent.target_position = result.position

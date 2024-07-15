@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm3mv3bm00ji"]
+[gd_scene load_steps=6 format=3 uid="uid://dm3mv3bm00ji"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_w5dkv"]
 [ext_resource type="Script" path="res://Scripts/PauseMenuController.gd" id="2_vl4l5"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_2wv4f"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h2ejq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5tnka"]
 
@@ -50,6 +52,10 @@ text = "Return to Main Menu"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.859997, 0)
 mesh = SubResource("CapsuleMesh_2wv4f")
 skeleton = NodePath("../Pivot")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.673246, 0, 0, 0, -0.00610265, 0.557203, 0, -0.230286, -0.014766, -0.000134945, 1.26019, -0.487195)
+mesh = SubResource("CapsuleMesh_h2ejq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.859997, 0)
