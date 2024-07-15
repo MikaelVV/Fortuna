@@ -37,12 +37,14 @@ func _process(delta):
 	if(navigationAgent.is_target_reached()):
 		return
 	
-	var new_velocity = movement()
+	movement(delta)
+	pass
+	##var new_velocity = movement()
 	
-	velocity.x = new_velocity.x
-	velocity.z = new_velocity.z
+	##velocity.x = new_velocity.x
+	##velocity.z = new_velocity.z
 	
-	move_and_slide()
+	#move_and_slide()
 	
 
 
@@ -74,15 +76,20 @@ func get_world_pos() -> void:
 	
 	
 
-func movement() -> Vector3:
-	var next_path_position = navigationAgent.get_next_path_position()
-	var current_agent_position = global_position
+func movement(delta):
+	var targetPosition = navigationAgent.get_next_path_position()
+	var direction = global_position.direction_to(targetPosition)
 	
-	var new_velocity = next_path_position - current_agent_position
-	new_velocity = new_velocity.normalized() * SPEED
+	velocity = direction * SPEED
+	move_and_slide()
+	##var next_path_position = navigationAgent.get_next_path_position()
+	##var current_agent_position = global_position
+	
+	##var new_velocity = next_path_position - current_agent_position
+	##new_velocity = new_velocity.normalized() * SPEED
 	
 	
-	return new_velocity
+	##return new_velocity
 
 func look_at_path(direction : Vector3) -> void:
 	look_at(Vector3(direction.x, global_position.y, direction.z), Vector3.UP)
