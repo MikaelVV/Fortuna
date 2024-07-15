@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://kwqale4t5srm"]
+[gd_scene load_steps=11 format=3 uid="uid://kwqale4t5srm"]
 
 [ext_resource type="PackedScene" uid="uid://dm3mv3bm00ji" path="res://Scenes/player.tscn" id="1_4nac1"]
 
@@ -12,26 +12,37 @@ background_mode = 2
 sky = SubResource("Sky_adkf3")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6p03x"]
-vertices = PackedVector3Array(-29.5, 0.1965, -29.5, -29.5, 0.1965, 29.5, 29.5, 0.1965, 29.5, 29.5, 0.1965, -29.5)
+vertices = PackedVector3Array(-29.5, 0.5665, -29.5, -29.5, 0.5665, 29.5, 29.5, 0.5665, 29.5, 29.5, 0.5665, -29.5)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-cell_height = 0.01
 
 [sub_resource type="BoxMesh" id="BoxMesh_x61n6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_16i7l"]
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_p1efv"]
+vertices = PackedVector3Array(-24, 0.5, -24, -24, 0.5, 24, 24, 0.5, 24, 24, 0.5, -24)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_radius = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lndvm"]
+size = Vector2(50, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2r56i"]
+data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
+
 [node name="Main01" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_4nac1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.5291, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4g8mf")
-
-[node name="Player" parent="." instance=ExtResource("1_4nac1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393109, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.87451, 0.485008, 0, -0.485008, 0.87451, 0, 23.4912, 30.2568)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+visible = false
 navigation_mesh = SubResource("NavigationMesh_6p03x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
@@ -42,3 +53,15 @@ mesh = SubResource("BoxMesh_x61n6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_16i7l")
+
+[node name="NavigationRegion3D2" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.2072, 0)
+navigation_mesh = SubResource("NavigationMesh_p1efv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D2"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D2/StaticBody3D"]
+mesh = SubResource("PlaneMesh_lndvm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_2r56i")

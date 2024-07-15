@@ -16,7 +16,7 @@ script = ExtResource("1_w5dkv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.859997, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5.02109, 5.76235)
+transform = Transform3D(1, 0, 0, 0, 0.727641, 0.685958, 0, -0.685958, 0.727641, 0, 9.02109, 10.7624)
 
 [node name="HealthBar" type="ProgressBar" parent="Pivot/Camera3D"]
 offset_right = 249.0
@@ -48,12 +48,12 @@ text = "Resume"
 layout_mode = 2
 text = "Return to Main Menu"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.859997, 0)
 mesh = SubResource("CapsuleMesh_2wv4f")
 skeleton = NodePath("../Pivot")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="Head" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.673246, 0, 0, 0, -0.00610265, 0.557203, 0, -0.230286, -0.014766, -0.000134945, 1.26019, -0.487195)
 mesh = SubResource("CapsuleMesh_h2ejq")
 
@@ -64,6 +64,7 @@ shape = SubResource("CapsuleShape3D_5tnka")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.1
 target_desired_distance = 0.1
+path_max_distance = 300.01
 
 [connection signal="pressed" from="Pivot/Camera3D/PauseMenu/MarginContainer/VBoxContainer/ResumeGame" to="Pivot/Camera3D/PauseMenu" method="_on_resume_game_pressed"]
 [connection signal="pressed" from="Pivot/Camera3D/PauseMenu/MarginContainer/VBoxContainer/ReturnToMainMenu" to="Pivot/Camera3D/PauseMenu" method="_on_return_to_main_menu_pressed"]
