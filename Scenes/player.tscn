@@ -56,6 +56,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.859997, 0)
 shape = SubResource("CapsuleShape3D_5tnka")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
 
 [connection signal="pressed" from="Pivot/Camera3D/PauseMenu/MarginContainer/VBoxContainer/ResumeGame" to="Pivot/Camera3D/PauseMenu" method="_on_resume_game_pressed"]
 [connection signal="pressed" from="Pivot/Camera3D/PauseMenu/MarginContainer/VBoxContainer/ReturnToMainMenu" to="Pivot/Camera3D/PauseMenu" method="_on_return_to_main_menu_pressed"]

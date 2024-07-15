@@ -1,6 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://kwqale4t5srm"]
+[gd_scene load_steps=8 format=3 uid="uid://kwqale4t5srm"]
 
 [ext_resource type="PackedScene" uid="uid://dm3mv3bm00ji" path="res://Scenes/player.tscn" id="1_4nac1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qubg4"]
+
+[sub_resource type="Sky" id="Sky_adkf3"]
+sky_material = SubResource("ProceduralSkyMaterial_qubg4")
+
+[sub_resource type="Environment" id="Environment_4g8mf"]
+background_mode = 2
+sky = SubResource("Sky_adkf3")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6p03x"]
 vertices = PackedVector3Array(-29.5, 0.1965, -29.5, -29.5, 0.1965, 29.5, 29.5, 0.1965, 29.5, 29.5, 0.1965, -29.5)
@@ -12,6 +21,9 @@ cell_height = 0.01
 [sub_resource type="BoxShape3D" id="BoxShape3D_16i7l"]
 
 [node name="Main01" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4g8mf")
 
 [node name="Player" parent="." instance=ExtResource("1_4nac1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393109, 0)

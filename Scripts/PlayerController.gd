@@ -34,8 +34,15 @@ func _process(delta):
 	if(navigationAgent.is_navigation_finished()):
 		return
 	
+	moveToPosition(delta)
 	pass
 
+func moveToPosition(delta):
+	var targetPosition = navigationAgent.get_next_path_position()
+	var direction = global_position.direction_to(targetPosition)
+	
+	velocity = direction * SPEED
+	move_and_slide()
 
 func _input(event):
 	if Input.is_action_just_pressed("MoveToLocation"):
@@ -51,6 +58,8 @@ func _input(event):
 		
 		var result = space.intersect_ray(rayQuery)
 		print(result)
+		
+		navigationAgent.target_position = result.position
 
 # Function "kuuntelee" kaikkia inputteja, joka tässä tapauksessa on hiiri.
 # ja määrittelee hiiren liikkuvuuden kameran kanssa.
