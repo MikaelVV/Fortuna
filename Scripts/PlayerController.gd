@@ -16,6 +16,7 @@ var paused = false
 @export var JUMP_VELOCITY = 6
 
 # Määritellään pelaajan health, pivot ja camera variablet.
+@onready var navigationAgent := $NavigationAgent3D
 @onready var health = max_health : set = _set_health
 @onready var HealthBar := $Pivot/Camera3D/HealthBar
 @onready var pivot := $Pivot
@@ -28,6 +29,21 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready() -> void:
 	HealthBar.max_value = max_health
 	_set_heatlhbar()
+
+func _input(event):
+	if Input.is_action_just_pressed("MoveToLocation"):
+		var mousePosition = get_viewport().get_mouse_position()
+		var rayLength = 150
+		var fromPosition = camera.project_ray_origin(mousePosition)
+		var toPosition = fromPosition + camera.project_ray_origin(mousePosition) * rayLength
+		var space = get_world_3d().direct_space_state
+		var rayQuery = PhysicsRayQueryParameters3D.new()
+		
+		rayQuery.from = fromPosition
+		rayQuery.to = toPosition
+		
+		var result = space.intersact_ray(rayQuery)
+		print(result)
 
 # Function "kuuntelee" kaikkia inputteja, joka tässä tapauksessa on hiiri.
 # ja määrittelee hiiren liikkuvuuden kameran kanssa.
@@ -52,17 +68,6 @@ func _physics_process(delta) -> void:
 		velocity.y = JUMP_VELOCITY
 		damage()
 
-	# Määritellään pelaajan suunta inputit. Näitä voi lisäillä, kun menee Project -> Project Settings ja Input Map.
-	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var direction = (pivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
 
 
 #Pelaaja ottaa vahinkoa kun osuu collideriin samas layeris kun vihollinen
