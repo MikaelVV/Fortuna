@@ -35,7 +35,7 @@ func _input(event):
 		var mousePosition = get_viewport().get_mouse_position()
 		var rayLength = 150
 		var fromPosition = camera.project_ray_origin(mousePosition)
-		var toPosition = fromPosition + camera.project_ray_origin(mousePosition) * rayLength
+		var toPosition = fromPosition + camera.project_ray_normal(mousePosition) * rayLength
 		var space = get_world_3d().direct_space_state
 		var rayQuery = PhysicsRayQueryParameters3D.new()
 		
